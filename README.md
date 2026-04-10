@@ -11,12 +11,6 @@ Desarrollado como proyecto profesional individual.
 - **ORM:** Prisma
 - **Deploy:** Railway (backend) + Vercel (frontend)
 
-## Estructura del proyecto
-
-rotiseria-app/
-├── client/ → Frontend React
-└── server/ → Backend Node.js
-
 ## Cómo correr el proyecto localmente
 
 ### Backend
