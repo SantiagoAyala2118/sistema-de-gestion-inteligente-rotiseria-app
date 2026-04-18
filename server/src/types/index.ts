@@ -7,5 +7,5 @@ export interface AuthPayload {
 }
 
 export interface AuthRequest extends Request {
-  user?: AuthPayload;
+  userLogged?: AuthPayload;
 }
