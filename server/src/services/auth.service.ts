@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
-import { hashPassword, comparePassword } from "../helpers/bcrypt.js";
-import prisma from "../prisma/client.js";
-import { AuthPayload } from "../types/index.js";
+import { hashPassword, comparePassword } from "../helpers/bcrypt";
+import prisma from "../prisma/client";
+import { AuthPayload } from "../types/index";
 
 export const loginService = async (email: string, password: string) => {
   const usuario = await prisma.usuario.findUnique({ where: { email } });
@@ -22,8 +22,14 @@ export const loginService = async (email: string, password: string) => {
     rol: usuario.rol,
   };
 
-  const token = jwt.sign(payload, process.env.JWT_SECRET as String, {
-    expiresIn: "12hs",
+  const jwtSecret = process.env.JWT_SECRET;
+
+  if (!jwtSecret) {
+    throw new Error("JWT_SECRET no está definido en las variables de entorno");
+  }
+
+  const token = jwt.sign(payload, jwtSecret, {
+    expiresIn: "12h",
   });
 
   return {
