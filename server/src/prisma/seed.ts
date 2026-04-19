@@ -1,5 +1,5 @@
-import prisma from "./client.js";
-import { hashPassword } from "../helpers/bcrypt.js";
+import prisma from "./client";
+import { hashPassword } from "../helpers/bcrypt";
 
 export const main = async () => {
   const hash = await hashPassword("admin123", process.env.SALTS as string);
