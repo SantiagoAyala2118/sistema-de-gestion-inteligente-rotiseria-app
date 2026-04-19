@@ -1,5 +1,5 @@
-import prisma from "./client";
-import { hashPassword } from "../helpers/bcrypt";
+import prisma from "./client.js";
+import { hashPassword } from "../helpers/bcrypt.js";
 
 export const main = async () => {
   const hash = await hashPassword("admin123", process.env.SALTS as string);
@@ -16,12 +16,12 @@ export const main = async () => {
   });
 
   console.log("Usuario admin creado correctamente");
-
-  try {
-    main();
-  } catch (err: any) {
-    console.error(err.message);
-  } finally {
-    prisma.$disconnect;
-  }
 };
+
+try {
+  main();
+} catch (err: any) {
+  console.error(err.message);
+} finally {
+  prisma.$disconnect;
+}
