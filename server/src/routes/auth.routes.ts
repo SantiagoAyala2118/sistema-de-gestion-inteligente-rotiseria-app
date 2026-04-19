@@ -4,7 +4,7 @@ import { verificarToken, soloAdmin } from "../middlewares/auth.middleware";
 
 const authRouter = Router();
 
-authRouter.post("/register", register);
-authRouter.post("/login", verificarToken, soloAdmin, login);
+authRouter.post("/login", login);
+authRouter.post("/register", verificarToken, soloAdmin, register);
 
 export default authRouter;
