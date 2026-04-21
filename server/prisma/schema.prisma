@@ -1,0 +1,124 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Rol {
+  OPERADOR
+  ADMINISTRADOR
+}
+
+enum MedioDePago {
+  EFECTIVO
+  TRANSFERENCIA
+  QR
+  TARJETA
+}
+
+enum TipoMovimiento {
+  VENTA
+  REPOSICION
+  AJUSTE
+}
+
+model Usuario {
+  id         Int      @id @default(autoincrement())
+  nombre     String
+  email      String   @unique
+  password   String
+  rol        Rol      @default(OPERADOR)
+  activo     Boolean  @default(true)
+  creadoEn   DateTime @default(now())
+
+  ventas     Venta[]
+}
+
+model Categoria {
+  id         Int        @id @default(autoincrement())
+  nombre     String     @unique
+
+  productos  Producto[]
+}
+
+model Producto {
+  id           Int       @id @default(autoincrement())
+  nombre       String
+  precioVenta  Decimal   @db.Decimal(10, 2)
+  costoUnidad  Decimal   @db.Decimal(10, 2)
+  activo       Boolean   @default(true)
+  creadoEn     DateTime  @default(now())
+
+  categoriaId  Int
+  categoria    Categoria @relation(fields: [categoriaId], references: [id])
+
+  stock        Stock?
+  detalles     DetalleVenta[]
+}
+
+model Stock {
+  id           Int       @id @default(autoincrement())
+  cantidad     Int       @default(0)
+  umbralMinimo Int       @default(5)
+  actualizadoEn DateTime @updatedAt
+
+  productoId   Int       @unique
+  producto     Producto  @relation(fields: [productoId], references: [id])
+
+  movimientos  MovimientoStock[]
+}
+
+model MovimientoStock {
+  id        Int            @id @default(autoincrement())
+  tipo      TipoMovimiento
+  cantidad  Int
+  nota      String?
+  creadoEn  DateTime       @default(now())
+
+  stockId   Int
+  stock     Stock          @relation(fields: [stockId], references: [id])
+
+  ventaId   Int?
+  venta     Venta?         @relation(fields: [ventaId], references: [id])
+}
+
+model Venta {
+  id           Int         @id @default(autoincrement())
+  total        Decimal     @db.Decimal(10, 2)
+  medioDePago  MedioDePago
+  creadoEn     DateTime    @default(now())
+
+  usuarioId    Int
+  usuario      Usuario     @relation(fields: [usuarioId], references: [id])
+
+  detalles     DetalleVenta[]
+  movimientos  MovimientoStock[]
+}
+
+model DetalleVenta {
+  id            Int      @id @default(autoincrement())
+  cantidad      Int
+  precioUnitario Decimal @db.Decimal(10, 2)
+
+  ventaId       Int
+  venta         Venta    @relation(fields: [ventaId], references: [id])
+
+  productoId    Int
+  producto      Producto @relation(fields: [productoId], references: [id])
+}
+
+model CierreDia {
+  id              Int      @id @default(autoincrement())
+  fecha           DateTime
+  totalVendido    Decimal  @db.Decimal(10, 2)
+  totalTransacciones Int
+  efectivo        Decimal  @db.Decimal(10, 2)
+  transferencia   Decimal  @db.Decimal(10, 2)
+  qr              Decimal  @db.Decimal(10, 2)
+  tarjeta         Decimal  @db.Decimal(10, 2)
+  resumenJson     Json
+  creadoEn        DateTime @default(now())
+}
