@@ -7,7 +7,8 @@
     "dev": "nodemon --exec ts-node src/app.ts",
     "build": "tsc",
     "start": "node dist/app.js",
-    "seed:first_user": "npx ts-node src/prisma/seed.ts"
+    "seed:first_user": "npx ts-node src/prisma/seed.ts",
+    "seed:categorias": "npx ts-node src/prisma/seedCategories.ts"
   },
   "keywords": [],
   "author": "",
