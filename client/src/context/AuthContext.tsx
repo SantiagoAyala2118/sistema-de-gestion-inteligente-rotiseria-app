@@ -14,6 +14,7 @@ interface AuthContextType {
   login: (token: string, usuario: Usuario) => void;
   logout: () => void;
   isAdmin: () => boolean;
+  cargando: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -21,6 +22,7 @@ const AuthContext = createContext<AuthContextType | null>(null);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [usuario, setUsuario] = useState<Usuario | null>(null);
   const [token, setToken] = useState<string | null>(null);
+  const [cargando, setCargando] = useState(true);
 
   // Al montar, intentamos restaurar la sesión desde localStorage
   useEffect(() => {
@@ -30,6 +32,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setToken(storedToken);
       setUsuario(JSON.parse(storedUsuario));
     }
+    setCargando(false);
   }, []);
 
   const login = (token: string, usuario: Usuario) => {
@@ -49,7 +52,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const isAdmin = () => usuario?.rol === "ADMINISTRADOR";
 
   return (
-    <AuthContext.Provider value={{ usuario, token, login, logout, isAdmin }}>
+    <AuthContext.Provider
+      value={{ usuario, token, cargando, login, logout, isAdmin }}
+    >
       {children}
     </AuthContext.Provider>
   );

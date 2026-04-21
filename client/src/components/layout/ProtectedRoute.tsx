@@ -7,7 +7,9 @@ interface Props {
 }
 
 const ProtectedRoute = ({ children, soloAdmin = false }: Props) => {
-  const { token, isAdmin } = useAuth();
+  const { token, isAdmin, cargando } = useAuth();
+
+  if (cargando) return null;
 
   if (!token) {
     return <Navigate to={"./login"} replace />;
