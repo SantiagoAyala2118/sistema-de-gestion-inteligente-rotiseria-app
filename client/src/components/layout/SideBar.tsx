@@ -99,7 +99,7 @@ const navItems = [
   },
   {
     label: "Productos",
-    path: "/productos",
+    path: "/products",
     icon: (
       <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none">
         <path
