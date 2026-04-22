@@ -4,6 +4,7 @@ import ProtectedRoute from "./components/layout/ProtectedRoute";
 import Layout from "./components/layout/Layout";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import Productos from "./pages/Products";
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
             }
           >
             <Route path="/dashboard" element={<Dashboard />} />
-            {/* Acá vamos agregando las demás rutas a medida que las creamos */}
+            <Route path="/products" element={<Productos />} />
           </Route>
 
           <Route path="*" element={<Navigate to="/login" replace />} />
