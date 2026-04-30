@@ -17,7 +17,18 @@ export const getProducts = async (req: Request, res: Response) => {
       },
     });
   } catch (err: any) {
-    res.status(500).json({ message: err.message });
+    console.error("Error: ", err);
+    if (err.statusCode === 500) {
+      return res.status(500).json({
+        ok: false,
+        msg: "Error interno del servidor",
+      });
+    } else {
+      return res.status(400).json({
+        ok: false,
+        msg: err.message,
+      });
+    }
   }
 };
 
@@ -31,7 +42,17 @@ export const getProductsById = async (req: Request, res: Response) => {
       data: producto,
     });
   } catch (err: any) {
-    res.status(500).json({ message: err.message });
+    console.error("Error: ", err);
+    if (err.statusCode === 500) {
+      return res
+        .status(500)
+        .json({ ok: false, msg: "Error interno del servidor" });
+    } else {
+      return res.status(400).json({
+        ok: false,
+        msg: err.message,
+      });
+    }
   }
 };
 
@@ -64,7 +85,17 @@ export const createProduct = async (req: Request, res: Response) => {
       data: producto,
     });
   } catch (err: any) {
-    res.status(500).json({ message: err.message });
+    console.error("Error: ", err);
+    if (err.statusCode === 500) {
+      return res
+        .status(500)
+        .json({ ok: false, msg: "Error interno del servidor" });
+    } else {
+      return res.status(400).json({
+        ok: false,
+        msg: err.message,
+      });
+    }
   }
 };
 
@@ -76,7 +107,17 @@ export const editProduct = async (req: Request, res: Response) => {
       data: producto,
     });
   } catch (err: any) {
-    res.status(500).json({ message: err.message });
+    console.error("Error: ", err);
+    if (err.statusCode === 500) {
+      return res
+        .status(500)
+        .json({ ok: false, msg: "Error interno del servidor" });
+    } else {
+      return res.status(400).json({
+        ok: false,
+        msg: err.message,
+      });
+    }
   }
 };
 
@@ -85,6 +126,17 @@ export const deactivateProduct = async (req: Request, res: Response) => {
     await desactivarProducto(Number(req.params.id));
     return res.json({ message: "Producto desactivado correctamente" });
   } catch (err: any) {
-    res.status(500).json({ message: err.message });
+    console.error("Error: ", err);
+
+    if (err.statusCode === 500) {
+      return res
+        .status(500)
+        .json({ ok: false, msg: "Error interno del servidor" });
+    } else {
+      return res.status(400).json({
+        ok: false,
+        msg: err.message,
+      });
+    }
   }
 };
