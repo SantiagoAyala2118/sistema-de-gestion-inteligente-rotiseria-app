@@ -12,8 +12,8 @@ const inventoryRouter = Router();
 inventoryRouter.use(verificarToken);
 
 inventoryRouter.get("/", getInventory);
-inventoryRouter.get("/stock-bajo", getLowStock);
-inventoryRouter.patch("/:productoId/reponer", replenishStock);
-inventoryRouter.patch("/:productoId/umbral", soloAdmin, updateThreshold);
+inventoryRouter.get("/low-stock", getLowStock);
+inventoryRouter.patch("/:productoId/replenish", replenishStock);
+inventoryRouter.patch("/:productoId/threshold", soloAdmin, updateThreshold);
 
 export default inventoryRouter;
