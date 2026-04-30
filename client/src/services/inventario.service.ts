@@ -3,7 +3,7 @@ import type { Producto } from "../types";
 
 export const getInventario = async (): Promise<Producto[]> => {
   const { data } = await api.get("/inventory");
-  return data.data.inventario;
+  return data.data.inventory;
 };
 
 export const getStockBajo = async (): Promise<Producto[]> => {

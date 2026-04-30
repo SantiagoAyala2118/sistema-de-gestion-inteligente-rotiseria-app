@@ -12,7 +12,7 @@ export const getInventory = async (req: Request, res: Response) => {
 
     return res.status(200).json({
       ok: true,
-      data: inventory,
+      data: { inventory },
     });
   } catch (err: any) {
     console.error("Error: ", err);
@@ -36,7 +36,7 @@ export const getLowStock = async (req: Request, res: Response) => {
 
     return res.status(200).json({
       ok: true,
-      data: lowInventoy,
+      data: { lowInventoy },
     });
   } catch (err: any) {
     console.error("Error: ", err);
@@ -70,7 +70,7 @@ export const replenishStock = async (req: Request, res: Response) => {
 
     return res.status(200).json({
       ok: true,
-      data: stock,
+      data: { stock },
     });
   } catch (err: any) {
     console.error("Error: ", err);
@@ -97,7 +97,7 @@ export const updateThreshold = async (req: Request, res: Response) => {
 
     return res.status(200).json({
       ok: true,
-      data: nuevoUmbral,
+      data: { nuevoUmbral },
     });
   } catch (err: any) {
     console.error("Error: ", err);
