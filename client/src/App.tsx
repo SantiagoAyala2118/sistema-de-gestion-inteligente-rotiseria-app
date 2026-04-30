@@ -5,6 +5,7 @@ import Layout from "./components/layout/Layout";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Productos from "./pages/Products";
+import Inventario from "./pages/Inventory";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           >
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/products" element={<Productos />} />
+            <Route path="/inventory" element={<Inventario />} />
           </Route>
 
           <Route path="*" element={<Navigate to="/login" replace />} />
