@@ -10,17 +10,29 @@ export const crearVenta = async (
   medioDePago: "EFECTIVO" | "TRANSFERENCIA" | "QR" | "TARJETA",
   usuarioId: number,
 ) => {
+  console.log("Items recibidos", JSON.stringify(items));
+  console.log(
+    "IDs a buscar",
+    items.map((item) => item.productoId),
+  );
+
   //* Se traen los productos asociados a la venta
   const productos = await prisma.producto.findMany({
     where: { id: { in: items.map((item) => item.productoId) } },
     include: { stock: true },
   });
 
+  console.log(
+    "Items encontrados",
+    JSON.stringify(productos.map((p) => p.nombre)),
+  );
+  console.log("Cantidad de productos encontrados", productos.length);
+
   //* Se verifica que haya stock suficiente en el inventario
   for (const item of items) {
-    const producto = productos.find((p) => {
-      p.id === item.productoId;
-    });
+    const producto = productos.find(
+      (p) => Number(p.id) === Number(item.productoId),
+    );
 
     if (!producto) {
       throw new Error(
@@ -42,9 +54,9 @@ export const crearVenta = async (
 
   //* Se calcula el total de la venta
   const total = items.reduce((acc, item) => {
-    const producto = productos.find((p) => {
-      p.id === item.productoId;
-    })!;
+    const producto = productos.find(
+      (p) => Number(p.id) === Number(item.productoId),
+    )!;
     return acc + Number(producto?.precioVenta) * item.cantidad;
   }, 0);
 
@@ -58,7 +70,9 @@ export const crearVenta = async (
         usuarioId,
         detalles: {
           create: items.map((item) => {
-            const producto = productos.find((p) => p.id === item.productoId)!;
+            const producto = productos.find(
+              (p) => Number(p.id) === Number(item.productoId),
+            )!;
             return {
               productoId: item.productoId,
               cantidad: item.cantidad,
@@ -75,7 +89,9 @@ export const crearVenta = async (
     });
     //* Descuento del stock
     for (const item of items) {
-      const producto = productos.find((p) => p.id === item.productoId)!;
+      const producto = productos.find(
+        (p) => Number(p.id) === Number(item.productoId),
+      )!;
 
       await tx.stock.update({
         where: { productoId: producto.id },
