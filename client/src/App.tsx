@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Productos from "./pages/Products";
 import Inventario from "./pages/Inventory";
+import Ventas from "./pages/Sales";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/products" element={<Productos />} />
             <Route path="/inventory" element={<Inventario />} />
+            <Route path="/sales" element={<Ventas />} />
           </Route>
 
           <Route path="*" element={<Navigate to="/login" replace />} />
