@@ -35,4 +35,4 @@ Copiá `server/.env.example` a `server/.env` y completá los valores necesarios.
 
 ## Estado del proyecto
 
-En desarrollo activo — Fase 1.
+En desarrollo activo - Fase 2.
