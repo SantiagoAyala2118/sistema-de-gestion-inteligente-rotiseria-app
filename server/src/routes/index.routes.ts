@@ -4,6 +4,7 @@ import productRouter from "./producto.routes";
 import categoryRouter from "./categoria.routes";
 import inventoryRouter from "./inventario.routes";
 import saleRouter from "./venta.routes";
+import dashboardRouter from "./dashboard.routes";
 
 const router = Router();
 
@@ -16,5 +17,7 @@ router.use("/categories", categoryRouter);
 router.use("/inventory", inventoryRouter);
 
 router.use("/sales", saleRouter);
+
+router.use("/dashboard", dashboardRouter);
 
 export default router;
