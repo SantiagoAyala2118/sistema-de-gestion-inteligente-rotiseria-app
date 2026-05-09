@@ -21,6 +21,6 @@ router.use("/sales", saleRouter);
 
 router.use("/dashboard", dashboardRouter);
 
-router.use("/day-closing", dayClosingRouter);
+router.use("/end-day", dayClosingRouter);
 
 export default router;
