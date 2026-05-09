@@ -88,7 +88,7 @@ export const obtenerCierres = async () => {
   });
 };
 
-export const obtenerCierrePorDia = async (id: number) => {
+export const obtenerCierrePorId = async (id: number) => {
   return prisma.cierreDia.findUnique({
     where: { id },
   });
