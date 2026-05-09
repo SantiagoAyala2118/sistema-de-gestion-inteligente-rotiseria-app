@@ -5,6 +5,7 @@ import categoryRouter from "./categoria.routes";
 import inventoryRouter from "./inventario.routes";
 import saleRouter from "./venta.routes";
 import dashboardRouter from "./dashboard.routes";
+import dayClosingRouter from "./cierre.routes";
 
 const router = Router();
 
@@ -19,5 +20,7 @@ router.use("/inventory", inventoryRouter);
 router.use("/sales", saleRouter);
 
 router.use("/dashboard", dashboardRouter);
+
+router.use("/day-closing", dayClosingRouter);
 
 export default router;
