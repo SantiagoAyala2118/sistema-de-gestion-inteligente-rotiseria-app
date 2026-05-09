@@ -218,7 +218,7 @@ const CierreDia = () => {
             </h2>
             {(() => {
               const ranking = cierre
-                ? (cierre.resumenJson as any).rankingProductos
+                ? (cierre.resumenJson as any).ranking
                 : (metricas?.rankingProductos ?? []);
 
               return ranking.length === 0 ? (
