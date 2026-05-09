@@ -3,10 +3,10 @@ import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/layout/ProtectedRoute";
 import Layout from "./components/layout/Layout";
 import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
 import Productos from "./pages/Products";
 import Inventario from "./pages/Inventory";
 import Ventas from "./pages/Sales";
+import Dashboard from "./pages/Dashboard/index";
 
 function App() {
   return (
