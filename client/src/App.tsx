@@ -7,6 +7,7 @@ import Productos from "./pages/Products";
 import Inventario from "./pages/Inventory";
 import Ventas from "./pages/Sales";
 import Dashboard from "./pages/Dashboard/index";
+import CierreDia from "./pages/Close";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="/products" element={<Productos />} />
             <Route path="/inventory" element={<Inventario />} />
             <Route path="/sales" element={<Ventas />} />
+            <Route path="/end-day" element={<CierreDia />} />
           </Route>
 
           <Route path="*" element={<Navigate to="/login" replace />} />
