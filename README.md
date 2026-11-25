@@ -159,4 +159,4 @@ El sistema cubre el circuito completo de venta, stock y cierre, y llegó a estar
 
 ## Autor
 
-**Santiago Tomás Ayala** · [GitHub](https://github.com/SantiagoAyala2118) · [LinkedIn](https://www.linkedin.com/in/TU-URL)
+**Santiago Tomás Ayala** · [GitHub](https://github.com/SantiagoAyala2118) · [LinkedIn](https://www.linkedin.com/in/santiago-tom%C3%A1s-ayala-641436390/)
