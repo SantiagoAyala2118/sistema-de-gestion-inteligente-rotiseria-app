@@ -49,8 +49,8 @@ export const obtenerMetricasDia = async () => {
     (acc: any, venta) => {
       const medio = venta.medioDePago;
       if (!acc[medio]) acc[medio] = { total: 0, cantidad: 0 };
-      acc[medio].total = +Number(venta.total);
-      acc[medio].cantidad = +1;
+      acc[medio].total += Number(venta.total);
+      acc[medio].cantidad += 1;
 
       return acc;
     },
@@ -63,11 +63,11 @@ export const obtenerMetricasDia = async () => {
 
   for (let venta of ventasDelDia) {
     for (let detalle of venta.detalles) {
-      const id = detalle.id;
+      const id = detalle.productoId;
       if (!conteoProductos[id]) {
         conteoProductos[id] = { nombre: detalle.producto.nombre, cantidad: 0 };
       }
-      conteoProductos[id].cantidad = detalle.cantidad;
+      conteoProductos[id].cantidad += detalle.cantidad;
     }
   }
 

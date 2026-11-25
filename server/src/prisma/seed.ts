@@ -2,7 +2,10 @@ import prisma from "./client";
 import { hashPassword } from "../helpers/bcrypt";
 
 export const main = async () => {
-  const hash = await hashPassword("admin123", process.env.SALTS as string);
+  const hash = await hashPassword(
+    process.env.ADMIN_PASSWORD as string,
+    process.env.SALTS as string,
+  );
 
   await prisma.usuario.upsert({
     create: {

@@ -10,23 +10,11 @@ export const crearVenta = async (
   medioDePago: "EFECTIVO" | "TRANSFERENCIA" | "QR" | "TARJETA",
   usuarioId: number,
 ) => {
-  console.log("Items recibidos", JSON.stringify(items));
-  console.log(
-    "IDs a buscar",
-    items.map((item) => item.productoId),
-  );
-
   //* Se traen los productos asociados a la venta
   const productos = await prisma.producto.findMany({
     where: { id: { in: items.map((item) => item.productoId) } },
     include: { stock: true },
   });
-
-  console.log(
-    "Items encontrados",
-    JSON.stringify(productos.map((p) => p.nombre)),
-  );
-  console.log("Cantidad de productos encontrados", productos.length);
 
   //* Se verifica que haya stock suficiente en el inventario
   for (const item of items) {
