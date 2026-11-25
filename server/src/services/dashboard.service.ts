@@ -49,8 +49,8 @@ export const obtenerMetricasDia = async () => {
     (acc: any, venta) => {
       const medio = venta.medioDePago;
       if (!acc[medio]) acc[medio] = { total: 0, cantidad: 0 };
-      acc[medio].total = +Number(venta.total);
-      acc[medio].cantidad = +1;
+      acc[medio].total += Number(venta.total);
+      acc[medio].cantidad += 1;
 
       return acc;
     },
