@@ -63,11 +63,11 @@ export const obtenerMetricasDia = async () => {
 
   for (let venta of ventasDelDia) {
     for (let detalle of venta.detalles) {
-      const id = detalle.id;
+      const id = detalle.productoId;
       if (!conteoProductos[id]) {
         conteoProductos[id] = { nombre: detalle.producto.nombre, cantidad: 0 };
       }
-      conteoProductos[id].cantidad = detalle.cantidad;
+      conteoProductos[id].cantidad += detalle.cantidad;
     }
   }
 
